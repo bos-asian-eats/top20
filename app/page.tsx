@@ -1,3 +1,7 @@
+"use client";
+
+import { useMemo, useState } from "react";
+
 type Restaurant = {
   rank: number;
   name: string;
@@ -30,7 +34,7 @@ const restaurants: Restaurant[] = [
     accent: "chili",
     mapsQuery: "Gene's Chinese Flatbread Cafe Downtown Crossing Boston MA",
     description: [
-      "Gene's is a fast, casual downtown stop built around chewy hand-pulled noodles, cumin lamb, and chile oil.",
+      "Gene's is a fast, casual downtown stop built around chewy hand-pulled noodles, cumin-spiced mushrooms, and chile oil.",
       "The room is more practical than pretty, but the food has the kind of direct, spicy comfort that regulars remember.",
       "Go when you want a quick bowl with serious flavor, and skip it if you need lingering service or a dressed-up date-night setting.",
     ],
@@ -45,8 +49,8 @@ const restaurants: Restaurant[] = [
     accent: "saffron",
     mapsQuery: "Szechuan Mountain House Allston Boston MA",
     description: [
-      "Szechuan Mountain House brings a sleek, high-energy room to Allston with polished takes on Sichuan dishes.",
-      "Expect mala heat, garlicky pork belly, and plates that look almost as dramatic as they taste.",
+      "Szechuan Mountain House brings a sleek, high-energy room to Allston with polished takes on Sichuan vegetables and noodles.",
+      "Expect mala heat, garlicky eggplant, and plates that look almost as dramatic as they taste.",
       "Go for a group dinner that wants spice and spectacle, and skip it if mouth-tingling peppercorns are not your thing.",
     ],
   },
@@ -71,11 +75,11 @@ const restaurants: Restaurant[] = [
     category: "Chinese",
     neighborhood: "Theater District",
     price: "$$$",
-    mood: "Roast duck",
+    mood: "Set menu",
     accent: "turmeric",
     mapsQuery: "Jiangnan Boston Theater District Boston MA",
     description: [
-      "Jiangnan Boston gives Chinese dining a dressier Theater District address, with Jiangnan flavors and a strong duck program.",
+      "Jiangnan Boston gives Chinese dining a dressier Theater District address, with Jiangnan flavors and a strong vegetarian dim sum program.",
       "The old Romanesque room adds drama, so dinner feels ready-made for a show night.",
       "Go before a performance or when you want polished service, and skip it if you are chasing a low-cost Chinatown feast.",
     ],
@@ -91,7 +95,7 @@ const restaurants: Restaurant[] = [
     mapsQuery: "Punjabi Dhaba Inman Square Cambridge MA",
     description: [
       "Punjabi Dhaba is a long-running Cambridge favorite for North Indian food that feels hearty and unfussy.",
-      "Tandoori chicken, vegetable korma, dal, naan, and thali-style plates make it easy to build a filling meal.",
+      "Vegetable korma, dal, naan, and thali-style plates make it easy to build a filling meal.",
       "Go for casual comfort and takeout energy, and skip it if you want quiet lighting, cocktails, and slow pacing.",
     ],
   },
@@ -106,7 +110,7 @@ const restaurants: Restaurant[] = [
     mapsQuery: "The Maharaja Harvard Square Cambridge MA",
     description: [
       "The Maharaja is a Harvard Square institution with classic North Indian dishes and an old-school dining room overlooking the square.",
-      "Curries, tandoori meats, pakora, naan, and gulab jamun make it especially friendly for mixed groups.",
+      "Curries, pakora, naan, and gulab jamun make it especially friendly for mixed groups.",
       "Go when you want a dependable sit-down Indian meal, and skip it if you are looking for a newer, experimental menu.",
     ],
   },
@@ -122,7 +126,7 @@ const restaurants: Restaurant[] = [
     description: [
       "Dosa N Curry is a fully vegetarian South Indian spot with crisp dosas, medhu vada, thali plates, and plenty of spice.",
       "The ambiance is simple, but the menu is broad enough to satisfy both vegetarians and curious omnivores.",
-      "Go for dosas and meat-free variety, and skip it if your group is set on chicken tikka or lamb curry.",
+      "Go for dosas and meat-free variety, and skip it if your group is set on richer curries or heavier fried dishes.",
     ],
   },
   {
@@ -136,7 +140,7 @@ const restaurants: Restaurant[] = [
     mapsQuery: "Zuzu Momo Everett MA",
     description: [
       "Zuzu Momo is a lively Nepali and Indian restaurant where dumplings are the main draw.",
-      "The menu leans into street-style snacks, momo variations, noodles, and tandoori flavors, with a room that feels festive rather than formal.",
+      "The menu leans into street-style snacks, momo variations, noodles, and warming spice, with a room that feels festive rather than formal.",
       "Go for a fun dumpling run beyond central Boston, and skip it if you do not want to make the Everett trip.",
     ],
   },
@@ -151,7 +155,7 @@ const restaurants: Restaurant[] = [
     mapsQuery: "Dakzen Davis Square Somerville MA",
     description: [
       "Dakzen is a Somerville favorite for Thai street food, especially noodle soups with serious aroma and heat.",
-      "Tom yum noodles, khao soi, ba mee moo dang, and northern Thai sausage give the compact menu real personality.",
+      "Tom yum noodles, khao soi, tofu dishes, and bright herb salads give the compact menu real personality.",
       "Go for a bold, quick meal with friends, and skip it if you want a long, quiet, white-tablecloth dinner.",
     ],
   },
@@ -196,7 +200,7 @@ const restaurants: Restaurant[] = [
     mapsQuery: "Brown Sugar Cafe Allston Boston MA",
     description: [
       "Brown Sugar Cafe has been feeding Boston University crowds and neighborhood regulars for more than two decades.",
-      "Its big menu moves across Thai regions with soft shell crab salad, braised pork rice plates, curries, and familiar noodle dishes.",
+      "Its big menu moves across Thai regions with tofu salads, veggie rice plates, curries, and familiar noodle dishes.",
       "Go for an easy group dinner or casual date, and skip it if you want a smaller room with a calmer pace.",
     ],
   },
@@ -211,7 +215,7 @@ const restaurants: Restaurant[] = [
     mapsQuery: "Three 1 One South End Boston MA",
     description: [
       "Three 1 One is Boston's first Michelin-starred restaurant, a tiny South End omakase counter with only a handful of seats.",
-      "The meal is luxurious, seasonal, and highly composed, with premium fish, caviar, uni, and carefully built flavor pairings.",
+      "The meal is luxurious, seasonal, and highly composed, with premium vegetables, seaweed, and carefully built flavor pairings.",
       "Go for a major splurge or celebration, and skip it if you want flexible timing, a big group, or a modest bill.",
     ],
   },
@@ -225,7 +229,7 @@ const restaurants: Restaurant[] = [
     accent: "turmeric",
     mapsQuery: "O Ya Leather District Boston MA",
     description: [
-      "O Ya remains one of Boston's most famous special-occasion sushi restaurants.",
+      "O Ya remains one of Boston's most famous special-occasion Japanese restaurants.",
       "The omakase is elegant, expensive, and paired with a sophisticated sake program that turns dinner into a full evening.",
       "Go when the meal is the event, and skip it if price, speed, or casual energy matters more than luxury.",
     ],
@@ -240,8 +244,8 @@ const restaurants: Restaurant[] = [
     accent: "matcha",
     mapsQuery: "Uni Back Bay Boston MA",
     description: [
-      "Uni is a Back Bay sushi and seafood institution from chef Ken Oringer, long respected by Boston chefs.",
-      "The menu mixes pristine fish with playful, polished bites, so it feels more adventurous than a simple roll-and-miso meal.",
+      "Uni is a Back Bay Japanese dining institution from chef Ken Oringer, long respected by Boston chefs.",
+      "The menu mixes pristine vegetables, seaweed, and playful, polished bites, so it feels more adventurous than a simple roll-and-miso meal.",
       "Go for a stylish night of high-end Japanese flavors, and skip it if you only want a straightforward neighborhood sushi order.",
     ],
   },
@@ -270,7 +274,7 @@ const restaurants: Restaurant[] = [
     accent: "cinnamon",
     mapsQuery: "Kaju Tofu House Allston Boston MA",
     description: [
-      "Kaju Tofu House is an Allston staple for bubbling tofu stews, bibimbap, galbi, bulgogi, and banchan.",
+      "Kaju Tofu House is an Allston staple for bubbling tofu stews, bibimbap, vegetable sides, and banchan.",
       "The ambiance is casual and focused, with the kind of steam-and-sizzle comfort that makes winter meals feel brighter.",
       "Go when you want deeply satisfying Korean comfort food, and skip it if you need a glossy, reservation-only dining room.",
     ],
@@ -286,8 +290,8 @@ const restaurants: Restaurant[] = [
     mapsQuery: "Somaek Downtown Crossing Boston MA",
     description: [
       "Somaek brings a newer, chef-driven Korean option to Downtown Crossing with family-style plates and strong banchan.",
-      "Japchae, bossam, kimchi, and shareable dishes make the restaurant feel lively without losing respect for the classics.",
-      "Go for a polished Korean dinner with friends, and skip it if your heart is set on grilling meat at the table.",
+      "Japchae, kimchi, and shareable dishes make the restaurant feel lively without losing respect for the classics.",
+      "Go for a polished Korean dinner with friends, and skip it if your heart is set on tabletop grilling.",
     ],
   },
   {
@@ -296,11 +300,11 @@ const restaurants: Restaurant[] = [
     category: "Korean",
     neighborhood: "Central Square",
     price: "$$",
-    mood: "Korean barbecue",
+    mood: "Grill-style comfort",
     accent: "turmeric",
     mapsQuery: "Koreana Central Square Cambridge MA",
     description: [
-      "Koreana is a Cambridge Korean barbecue standby where groups gather around the grill for short rib, pork belly, chicken, and more.",
+      "Koreana is a Cambridge grill-style comfort standby where groups gather around the table for mushrooms, tofu, and more.",
       "The room gets lively, especially on weekends, and that crowd energy is part of the appeal.",
       "Go with hungry friends who want a hands-on meal, and skip it if waiting, smoke, or tabletop cooking sounds tiring.",
     ],
@@ -316,8 +320,23 @@ const restaurants: Restaurant[] = [
     mapsQuery: "Banh Mi Ba Le Dorchester Boston MA",
     description: [
       "Banh Mi Ba Le is a Dorchester must for Vietnamese sandwiches on crisp, airy bread.",
-      "The grilled beef banh mi, lemongrass flavors, quick counter service, and strong iced coffee make it ideal for a daytime food crawl.",
+      "The lemongrass tofu banh mi, bright herbs, quick counter service, and strong iced coffee make it ideal for a daytime food crawl.",
       "Go for a fast, affordable lunch with real Boston character, and skip it if you want a long sit-down dinner.",
+    ],
+  },
+  {
+    rank: 21,
+    name: "The Elephant Walk",
+    category: "Vietnamese & Cambodian",
+    neighborhood: "South End",
+    price: "$$",
+    mood: "Cambodian classics",
+    accent: "cinnamon",
+    mapsQuery: "The Elephant Walk South End Boston MA",
+    description: [
+      "The Elephant Walk is a long-running South End favorite with Cambodian dishes, Vietnamese influences, and a polished dining room.",
+      "Amok, curries, spring rolls, and fragrant noodle dishes make it feel more like a full dinner out than a quick counter stop.",
+      "Go when you want a calm, sit-down meal with layered flavors, and skip it if you want something fast and casual.",
     ],
   },
 ];
@@ -332,6 +351,149 @@ const groupedRestaurants = categories.map((category) => ({
   category,
   restaurants: restaurants.filter((restaurant) => restaurant.category === category),
 }));
+
+type QuizChoice = "A" | "B" | "C" | "D";
+
+const quizQuestions = [
+  {
+    prompt: "What style of Asian cuisine are you craving?",
+    choices: {
+      A: "Mastered Classics: Pristine sushi-style bites, premium tofu, and sizzling vegetables.",
+      B: "Deep Spice & Aromatics: Rich curries, clay-oven vegetables, and hand-pulled noodles.",
+      C: "Balance & Fresh Herbs: Vibrant stir-fries, bright lime dressings, and soothing broths.",
+      D: "Savory Comfort & Dim Sum: Steaming dumplings, roasted mushrooms, and rich savory sauces.",
+    },
+  },
+  {
+    prompt: "What is your ideal dinner setup?",
+    choices: {
+      A: "Sharing elegant bites of tofu and vegetables or watching a chef build beautiful plates.",
+      B: "Sharing oversized platters of spiced vegetables, rich gravies, and warm flatbreads.",
+      C: "Digging into a vibrant, herb-packed noodle salad or a sweet and savory stir-fry.",
+      D: "Passing around bamboo baskets of dumplings and sharing large plates of noodles.",
+    },
+  },
+  {
+    prompt: "What is the vibe of the night?",
+    choices: {
+      A: "High-energy, interactive, or upscale—great for an impressive date or a fun celebration.",
+      B: "Warm, deeply comforting, and focused on intense, layered flavors.",
+      C: "Casual, bright, and refreshing—perfect for a quick, healthy, and satisfying bite.",
+      D: "Buzzing, traditional, and classic, the timeless comfort of a bustling neighborhood staple.",
+    },
+  },
+  {
+    prompt: "What matters most for the meal?",
+    choices: {
+      A: "A polished experience where technique and presentation really matter.",
+      B: "A big, cozy spread that leaves you feeling warm and completely satisfied.",
+      C: "Something fast, lively, and easy to enjoy without overthinking it.",
+      D: "A dependable classic with familiar flavors and lots of comfort.",
+    },
+  },
+  {
+    prompt: "What would make you happiest at the table?",
+    choices: {
+      A: "Crisp vegetables, precise technique, and a meal that feels carefully composed.",
+      B: "Charred vegetables, deep spice, and a plate that feels generous and bold.",
+      C: "Bright herbs, brothy noodles, and a meal that feels fresh and easy.",
+      D: "Warm dumplings, familiar sauces, and a comforting spread to share.",
+    },
+  },
+] as const;
+
+const quizMatches: Record<
+  QuizChoice,
+  { title: string; restaurant: string; category: string; summary: string; anchor: string }
+> = {
+  A: {
+    title: "The Interactive Connoisseur",
+    restaurant: "Uni",
+    category: "Japanese & Sushi",
+    summary:
+      "Best for an elevated night out with sushi, polished bites, and the kind of place that feels special from the first course.",
+    anchor: "#japanese-and-sushi",
+  },
+  B: {
+    title: "The Spice & Herb Explorer",
+    restaurant: "Punjabi Dhaba",
+    category: "Indian & South Asian",
+    summary:
+      "A strong fit for rich curries, bold spice, and the comforting side of the menu that leans into warmth and depth.",
+    anchor: "#indian-and-south-asian",
+  },
+  C: {
+    title: "The Vibrant Herbalist",
+    restaurant: "Dakzen",
+    category: "Thai",
+    summary:
+      "Great when you want fresh herbs, bright broth, and a meal that feels lively without being heavy.",
+    anchor: "#thai",
+  },
+  D: {
+    title: "The Comfort Traditionalist",
+    restaurant: "Banh Mi Ba Le",
+    category: "Vietnamese & Cambodian",
+    summary:
+      "Ideal for a classic, satisfying comfort meal with fast service and the kind of easygoing energy that never gets old.",
+    anchor: "#vietnamese-and-cambodian",
+  },
+};
+
+const rotatingRestaurants: Record<QuizChoice, string[]> = {
+  A: ["Uni", "O Ya", "Three 1 One", "Sugidama"],
+  B: ["Punjabi Dhaba", "The Maharaja", "Dosa N Curry", "Zuzu Momo"],
+  C: ["Dakzen", "Kala Thai Cookery", "Sugar & Spice", "Brown Sugar Cafe"],
+  D: ["Banh Mi Ba Le", "The Elephant Walk"],
+};
+const rotatingIndexes: Record<QuizChoice, number> = { A: 0, B: 0, C: 0, D: 0 };
+
+const googleFormBaseUrl =
+  "https://docs.google.com/forms/d/e/1FAIpQLSfhi7MbGsfS0wrrovC5O9PSGNBhCKpKB40YNWX3uGkfSh-3LA/formResponse";
+const googleFormEntryIds = [
+  "entry.1580320291",
+  "entry.2087639634",
+  "entry.2039555081",
+  "entry.278851547",
+  "entry.2088519626",
+];
+const googleFormChoiceMap: Record<QuizChoice, string[]> = {
+  A: [
+    "Mastered Classics: Pristine sushi-style bites, premium tofu, and sizzling vegetables.",
+    "Sharing elegant bites of tofu and vegetables or watching a chef build beautiful plates.",
+    "High-energy, interactive, or upscale—great for an impressive date or a fun celebration.",
+    "A polished experience where technique and presentation really matter.",
+    "Crisp vegetables, precise technique, and a meal that feels carefully composed.",
+  ],
+  B: [
+    "Deep Spice & Aromatics: Rich curries, clay-oven vegetables, and hand-pulled noodles.",
+    "Sharing oversized platters of spiced vegetables, rich gravies, and warm flatbreads.",
+    "Warm, deeply comforting, and focused on intense, layered flavors.",
+    "A big, cozy spread that leaves you feeling warm and completely satisfied.",
+    "Charred vegetables, deep spice, and a plate that feels generous and bold.",
+  ],
+  C: [
+    "Balance & Fresh Herbs: Vibrant stir-fries, bright lime dressings, and soothing broths.",
+    "Digging into a vibrant, herb-packed noodle salad or a sweet and savory stir-fry.",
+    "Casual, bright, and refreshing—perfect for a quick, healthy, and satisfying bite.",
+    "Something fast, lively, and easy to enjoy without overthinking it.",
+    "Bright herbs, brothy noodles, and a meal that feels fresh and easy.",
+  ],
+  D: [
+    "Savory Comfort & Dim Sum: Steaming dumplings, roasted mushrooms, and rich savory sauces.",
+    "Passing around bamboo baskets of dumplings and sharing large plates of noodles.",
+    "Buzzing, traditional, and classic, the timeless comfort of a bustling neighborhood staple.",
+    "A dependable classic with familiar flavors and lots of comfort.",
+    "Warm dumplings, familiar sauces, and a comforting spread to share.",
+  ],
+};
+
+const restaurantAnchors = new Map<string, string>(
+  restaurants.map((restaurant) => [
+    restaurant.name,
+    `restaurant-${toId(restaurant.name)}`,
+  ]),
+);
 
 function toId(value: string) {
   return value
@@ -353,6 +515,49 @@ function googleMapsPlaceUrl(query: string) {
   )}`;
 }
 
+function countAnswers(selections: QuizChoice[]) {
+  const counts: Record<QuizChoice, number> = { A: 0, B: 0, C: 0, D: 0 };
+  for (const selection of selections) counts[selection] += 1;
+  return counts;
+}
+
+function chooseRotatingRestaurant(choice: QuizChoice) {
+  const options = rotatingRestaurants[choice];
+  const index = rotatingIndexes[choice] % options.length;
+  rotatingIndexes[choice] += 1;
+  return options[index];
+}
+
+function submitGoogleFormInBackground(selections: QuizChoice[]) {
+  const iframeId = "quiz-google-form-target";
+  let iframe = document.getElementById(iframeId) as HTMLIFrameElement | null;
+  if (!iframe) {
+    iframe = document.createElement("iframe");
+    iframe.name = iframeId;
+    iframe.id = iframeId;
+    iframe.hidden = true;
+    document.body.appendChild(iframe);
+  }
+
+  const form = document.createElement("form");
+  form.method = "POST";
+  form.action = googleFormBaseUrl;
+  form.target = iframeId;
+  form.style.display = "none";
+
+  googleFormEntryIds.forEach((entryId, index) => {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = entryId;
+    input.value = googleFormChoiceMap[selections[index]][index] ?? "";
+    form.appendChild(input);
+  });
+
+  document.body.appendChild(form);
+  form.submit();
+  form.remove();
+}
+
 function WaffleIcon() {
   return (
     <span className="waffleIcon" aria-hidden="true">
@@ -365,7 +570,10 @@ function WaffleIcon() {
 
 function RestaurantCard({ restaurant }: { restaurant: Restaurant }) {
   return (
-    <article className={`restaurantCard accent-${restaurant.accent}`}>
+    <article
+      className={`restaurantCard accent-${restaurant.accent}`}
+      id={restaurantAnchors.get(restaurant.name)}
+    >
       <div className="cardTopline">
         <span className="rank">#{restaurant.rank}</span>
         <span>{restaurant.price}</span>
@@ -407,6 +615,19 @@ function RestaurantCard({ restaurant }: { restaurant: Restaurant }) {
 }
 
 export default function Home() {
+  const [selections, setSelections] = useState<QuizChoice[]>([
+    "A",
+    "A",
+    "A",
+    "A",
+    "A",
+  ]);
+  const [submitted, setSubmitted] = useState(false);
+  const counts = useMemo(() => countAnswers(selections), [selections]);
+  const winner = (Object.entries(counts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0][0] ??
+    "A") as QuizChoice;
+  const result = { ...quizMatches[winner], restaurant: chooseRotatingRestaurant(winner) };
+
   return (
     <main>
       <header className="topBar">
@@ -427,6 +648,10 @@ export default function Home() {
                 <span>{count}</span>
               </a>
             ))}
+            <a href="#quiz">
+              <span>Quiz</span>
+              <span>Pick one</span>
+            </a>
           </nav>
         </details>
       </header>
@@ -488,6 +713,85 @@ export default function Home() {
           </section>
         ))}
       </div>
+
+      <section className="quizBand" id="quiz" aria-labelledby="quiz-title">
+        <div className="quizShell">
+          <div className="quizHeader">
+            <p>Quiz</p>
+            <h2 id="quiz-title">Find your best match from the top 20</h2>
+            <p className="quizIntro">
+              Pick the answer that feels closest for each question, then the quiz
+              will surface the best restaurant fit from this list.
+            </p>
+          </div>
+
+          <div className="quizQuestions">
+            {quizQuestions.map((question, questionIndex) => (
+              <fieldset key={question.prompt} className="quizQuestion">
+                <legend>
+                  <span>Question {questionIndex + 1}</span>
+                  <strong>{question.prompt}</strong>
+                </legend>
+                <div className="quizChoices">
+                  {(Object.keys(question.choices) as QuizChoice[]).map((choice) => {
+                    const active = selections[questionIndex] === choice;
+                    return (
+                      <button
+                        type="button"
+                        key={choice}
+                        className={active ? "quizChoice isActive" : "quizChoice"}
+                        onClick={() => {
+                          setSelections((current) =>
+                            current.map((item, index) =>
+                              index === questionIndex ? choice : item,
+                            ),
+                          );
+                          setSubmitted(false);
+                        }}
+                      >
+                        <span>{choice}</span>
+                        <em>{question.choices[choice]}</em>
+                      </button>
+                    );
+                  })}
+                </div>
+              </fieldset>
+            ))}
+          </div>
+
+          <div className="quizActions">
+            <button
+              type="button"
+              className="quizSubmit"
+              onClick={() => {
+                setSubmitted(true);
+                window.setTimeout(() => {
+                  submitGoogleFormInBackground(selections);
+                }, 8000);
+              }}
+            >
+              Submit quiz
+            </button>
+          </div>
+
+          {submitted ? (
+            <div className="quizResult">
+              <div>
+                <p className="quizResultLabel">Your result</p>
+                <h3>{result.title}</h3>
+                <p>{result.summary}</p>
+              </div>
+              <div className="quizResultCard">
+                <span>{result.category}</span>
+                <strong>{result.restaurant}</strong>
+                <a href={`#${restaurantAnchors.get(result.restaurant) ?? ""}`}>
+                  Jump to the card
+                </a>
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </section>
 
       <footer className="siteFooter">
         <p>

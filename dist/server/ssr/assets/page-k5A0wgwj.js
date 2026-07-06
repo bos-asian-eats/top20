@@ -1,0 +1,799 @@
+import { a as require_react, o as __toESM, t as require_jsx_runtime } from "../index.js";
+//#region app/page.tsx
+var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
+var import_jsx_runtime = require_jsx_runtime();
+var categories = [
+	"Chinese",
+	"Indian & South Asian",
+	"Thai",
+	"Japanese & Sushi",
+	"Korean",
+	"Vietnamese & Cambodian"
+];
+var restaurants = [
+	{
+		rank: 1,
+		name: "Gene's Chinese Flatbread Cafe",
+		category: "Chinese",
+		neighborhood: "Downtown Crossing",
+		price: "$",
+		mood: "Hand-pulled noodles",
+		accent: "chili",
+		mapsQuery: "Gene's Chinese Flatbread Cafe Downtown Crossing Boston MA",
+		description: [
+			"Gene's is a fast, casual downtown stop built around chewy hand-pulled noodles, cumin-spiced mushrooms, and chile oil.",
+			"The room is more practical than pretty, but the food has the kind of direct, spicy comfort that regulars remember.",
+			"Go when you want a quick bowl with serious flavor, and skip it if you need lingering service or a dressed-up date-night setting."
+		]
+	},
+	{
+		rank: 2,
+		name: "Szechuan Mountain House",
+		category: "Chinese",
+		neighborhood: "Allston",
+		price: "$$",
+		mood: "Sichuan heat",
+		accent: "saffron",
+		mapsQuery: "Szechuan Mountain House Allston Boston MA",
+		description: [
+			"Szechuan Mountain House brings a sleek, high-energy room to Allston with polished takes on Sichuan vegetables and noodles.",
+			"Expect mala heat, garlicky eggplant, and plates that look almost as dramatic as they taste.",
+			"Go for a group dinner that wants spice and spectacle, and skip it if mouth-tingling peppercorns are not your thing."
+		]
+	},
+	{
+		rank: 3,
+		name: "Sumiao Hunan Kitchen",
+		category: "Chinese",
+		neighborhood: "Kendall Square",
+		price: "$$",
+		mood: "Modern Hunan",
+		accent: "matcha",
+		mapsQuery: "Sumiao Hunan Kitchen Kendall Square Cambridge MA",
+		description: [
+			"Sumiao Hunan Kitchen is a modern Cambridge spot for bold, tangy, and spicy Hunan cooking.",
+			"The dining room works for both date nights and group tables, with cocktails that make it feel livelier than a standard takeout stop.",
+			"Go for big flavors and a polished setting, and skip it if you only want gentle, familiar Chinese-American dishes."
+		]
+	},
+	{
+		rank: 4,
+		name: "Jiangnan Boston",
+		category: "Chinese",
+		neighborhood: "Theater District",
+		price: "$$$",
+		mood: "Set menu",
+		accent: "turmeric",
+		mapsQuery: "Jiangnan Boston Theater District Boston MA",
+		description: [
+			"Jiangnan Boston gives Chinese dining a dressier Theater District address, with Jiangnan flavors and a strong vegetarian dim sum program.",
+			"The old Romanesque room adds drama, so dinner feels ready-made for a show night.",
+			"Go before a performance or when you want polished service, and skip it if you are chasing a low-cost Chinatown feast."
+		]
+	},
+	{
+		rank: 5,
+		name: "Punjabi Dhaba",
+		category: "Indian & South Asian",
+		neighborhood: "Inman Square",
+		price: "$",
+		mood: "North Indian comfort",
+		accent: "cinnamon",
+		mapsQuery: "Punjabi Dhaba Inman Square Cambridge MA",
+		description: [
+			"Punjabi Dhaba is a long-running Cambridge favorite for North Indian food that feels hearty and unfussy.",
+			"Vegetable korma, dal, naan, and thali-style plates make it easy to build a filling meal.",
+			"Go for casual comfort and takeout energy, and skip it if you want quiet lighting, cocktails, and slow pacing."
+		]
+	},
+	{
+		rank: 6,
+		name: "The Maharaja",
+		category: "Indian & South Asian",
+		neighborhood: "Harvard Square",
+		price: "$$",
+		mood: "Classic Indian dining",
+		accent: "saffron",
+		mapsQuery: "The Maharaja Harvard Square Cambridge MA",
+		description: [
+			"The Maharaja is a Harvard Square institution with classic North Indian dishes and an old-school dining room overlooking the square.",
+			"Curries, pakora, naan, and gulab jamun make it especially friendly for mixed groups.",
+			"Go when you want a dependable sit-down Indian meal, and skip it if you are looking for a newer, experimental menu."
+		]
+	},
+	{
+		rank: 7,
+		name: "Dosa N Curry",
+		category: "Indian & South Asian",
+		neighborhood: "Somerville",
+		price: "$",
+		mood: "Vegetarian dosas",
+		accent: "matcha",
+		mapsQuery: "Dosa N Curry Somerville MA",
+		description: [
+			"Dosa N Curry is a fully vegetarian South Indian spot with crisp dosas, medhu vada, thali plates, and plenty of spice.",
+			"The ambiance is simple, but the menu is broad enough to satisfy both vegetarians and curious omnivores.",
+			"Go for dosas and meat-free variety, and skip it if your group is set on richer curries or heavier fried dishes."
+		]
+	},
+	{
+		rank: 8,
+		name: "Zuzu Momo",
+		category: "Indian & South Asian",
+		neighborhood: "Everett",
+		price: "$$",
+		mood: "Nepali momos",
+		accent: "chili",
+		mapsQuery: "Zuzu Momo Everett MA",
+		description: [
+			"Zuzu Momo is a lively Nepali and Indian restaurant where dumplings are the main draw.",
+			"The menu leans into street-style snacks, momo variations, noodles, and warming spice, with a room that feels festive rather than formal.",
+			"Go for a fun dumpling run beyond central Boston, and skip it if you do not want to make the Everett trip."
+		]
+	},
+	{
+		rank: 9,
+		name: "Dakzen",
+		category: "Thai",
+		neighborhood: "Davis Square",
+		price: "$",
+		mood: "Street-style noodles",
+		accent: "turmeric",
+		mapsQuery: "Dakzen Davis Square Somerville MA",
+		description: [
+			"Dakzen is a Somerville favorite for Thai street food, especially noodle soups with serious aroma and heat.",
+			"Tom yum noodles, khao soi, tofu dishes, and bright herb salads give the compact menu real personality.",
+			"Go for a bold, quick meal with friends, and skip it if you want a long, quiet, white-tablecloth dinner."
+		]
+	},
+	{
+		rank: 10,
+		name: "Kala Thai Cookery",
+		category: "Thai",
+		neighborhood: "Haymarket",
+		price: "$$",
+		mood: "Downtown Thai",
+		accent: "matcha",
+		mapsQuery: "Kala Thai Cookery Haymarket Boston MA",
+		description: [
+			"Kala Thai Cookery brings a bright Thai option to the heart of Boston near Haymarket.",
+			"The menu overlaps with sibling Cha Yen, but dishes like char kway teow, corn fritters, curries, and house-made ice cream make it more than a convenience stop.",
+			"Go when you need a downtown Thai dinner that still feels cared for, and skip it if you want the deepest regional Thai menu in the area."
+		]
+	},
+	{
+		rank: 11,
+		name: "Sugar & Spice",
+		category: "Thai",
+		neighborhood: "Porter Square",
+		price: "$$",
+		mood: "Regional Thai range",
+		accent: "saffron",
+		mapsQuery: "Sugar & Spice Porter Square Cambridge MA",
+		description: [
+			"Sugar & Spice is a Porter Square mainstay with a wide Thai menu and a warm, busy dining room.",
+			"Northern khao soi, rolled noodle soup, colorful salads, vegan menus, and gluten-free options make it easy for groups to agree.",
+			"Go when you want range and hospitality, and skip it if you prefer a tiny, highly focused menu."
+		]
+	},
+	{
+		rank: 12,
+		name: "Brown Sugar Cafe",
+		category: "Thai",
+		neighborhood: "Allston",
+		price: "$$",
+		mood: "Classic group spot",
+		accent: "cinnamon",
+		mapsQuery: "Brown Sugar Cafe Allston Boston MA",
+		description: [
+			"Brown Sugar Cafe has been feeding Boston University crowds and neighborhood regulars for more than two decades.",
+			"Its big menu moves across Thai regions with tofu salads, veggie rice plates, curries, and familiar noodle dishes.",
+			"Go for an easy group dinner or casual date, and skip it if you want a smaller room with a calmer pace."
+		]
+	},
+	{
+		rank: 13,
+		name: "Three 1 One",
+		category: "Japanese & Sushi",
+		neighborhood: "South End",
+		price: "$$$$",
+		mood: "Michelin omakase",
+		accent: "chili",
+		mapsQuery: "Three 1 One South End Boston MA",
+		description: [
+			"Three 1 One is Boston's first Michelin-starred restaurant, a tiny South End omakase counter with only a handful of seats.",
+			"The meal is luxurious, seasonal, and highly composed, with premium vegetables, seaweed, and carefully built flavor pairings.",
+			"Go for a major splurge or celebration, and skip it if you want flexible timing, a big group, or a modest bill."
+		]
+	},
+	{
+		rank: 14,
+		name: "O Ya",
+		category: "Japanese & Sushi",
+		neighborhood: "Leather District",
+		price: "$$$$",
+		mood: "Special occasion",
+		accent: "turmeric",
+		mapsQuery: "O Ya Leather District Boston MA",
+		description: [
+			"O Ya remains one of Boston's most famous special-occasion Japanese restaurants.",
+			"The omakase is elegant, expensive, and paired with a sophisticated sake program that turns dinner into a full evening.",
+			"Go when the meal is the event, and skip it if price, speed, or casual energy matters more than luxury."
+		]
+	},
+	{
+		rank: 15,
+		name: "Uni",
+		category: "Japanese & Sushi",
+		neighborhood: "Back Bay",
+		price: "$$$",
+		mood: "Fancy bites",
+		accent: "matcha",
+		mapsQuery: "Uni Back Bay Boston MA",
+		description: [
+			"Uni is a Back Bay Japanese dining institution from chef Ken Oringer, long respected by Boston chefs.",
+			"The menu mixes pristine vegetables, seaweed, and playful, polished bites, so it feels more adventurous than a simple roll-and-miso meal.",
+			"Go for a stylish night of high-end Japanese flavors, and skip it if you only want a straightforward neighborhood sushi order."
+		]
+	},
+	{
+		rank: 16,
+		name: "Sugidama",
+		category: "Japanese & Sushi",
+		neighborhood: "Davis Square",
+		price: "$$",
+		mood: "Soba and izakaya",
+		accent: "saffron",
+		mapsQuery: "Sugidama Davis Square Somerville MA",
+		description: [
+			"Sugidama is a calm Somerville izakaya and soba shop with polished noodles, donburi, sushi, and yakitori.",
+			"The buckwheat noodles and smoky broth are the soul of the menu, making it especially appealing on a cooler night.",
+			"Go for a lower-key Japanese meal with texture and comfort, and skip it if your only priority is omakase."
+		]
+	},
+	{
+		rank: 17,
+		name: "Kaju Tofu House",
+		category: "Korean",
+		neighborhood: "Allston",
+		price: "$$",
+		mood: "Soondubu comfort",
+		accent: "cinnamon",
+		mapsQuery: "Kaju Tofu House Allston Boston MA",
+		description: [
+			"Kaju Tofu House is an Allston staple for bubbling tofu stews, bibimbap, vegetable sides, and banchan.",
+			"The ambiance is casual and focused, with the kind of steam-and-sizzle comfort that makes winter meals feel brighter.",
+			"Go when you want deeply satisfying Korean comfort food, and skip it if you need a glossy, reservation-only dining room."
+		]
+	},
+	{
+		rank: 18,
+		name: "Somaek",
+		category: "Korean",
+		neighborhood: "Downtown Crossing",
+		price: "$$$",
+		mood: "Korean family plates",
+		accent: "chili",
+		mapsQuery: "Somaek Downtown Crossing Boston MA",
+		description: [
+			"Somaek brings a newer, chef-driven Korean option to Downtown Crossing with family-style plates and strong banchan.",
+			"Japchae, kimchi, and shareable dishes make the restaurant feel lively without losing respect for the classics.",
+			"Go for a polished Korean dinner with friends, and skip it if your heart is set on tabletop grilling."
+		]
+	},
+	{
+		rank: 19,
+		name: "Koreana",
+		category: "Korean",
+		neighborhood: "Central Square",
+		price: "$$",
+		mood: "Grill-style comfort",
+		accent: "turmeric",
+		mapsQuery: "Koreana Central Square Cambridge MA",
+		description: [
+			"Koreana is a Cambridge grill-style comfort standby where groups gather around the table for mushrooms, tofu, and more.",
+			"The room gets lively, especially on weekends, and that crowd energy is part of the appeal.",
+			"Go with hungry friends who want a hands-on meal, and skip it if waiting, smoke, or tabletop cooking sounds tiring."
+		]
+	},
+	{
+		rank: 20,
+		name: "Banh Mi Ba Le",
+		category: "Vietnamese & Cambodian",
+		neighborhood: "Dorchester",
+		price: "$",
+		mood: "Banh mi counter",
+		accent: "matcha",
+		mapsQuery: "Banh Mi Ba Le Dorchester Boston MA",
+		description: [
+			"Banh Mi Ba Le is a Dorchester must for Vietnamese sandwiches on crisp, airy bread.",
+			"The lemongrass tofu banh mi, bright herbs, quick counter service, and strong iced coffee make it ideal for a daytime food crawl.",
+			"Go for a fast, affordable lunch with real Boston character, and skip it if you want a long sit-down dinner."
+		]
+	},
+	{
+		rank: 21,
+		name: "The Elephant Walk",
+		category: "Vietnamese & Cambodian",
+		neighborhood: "South End",
+		price: "$$",
+		mood: "Cambodian classics",
+		accent: "cinnamon",
+		mapsQuery: "The Elephant Walk South End Boston MA",
+		description: [
+			"The Elephant Walk is a long-running South End favorite with Cambodian dishes, Vietnamese influences, and a polished dining room.",
+			"Amok, curries, spring rolls, and fragrant noodle dishes make it feel more like a full dinner out than a quick counter stop.",
+			"Go when you want a calm, sit-down meal with layered flavors, and skip it if you want something fast and casual."
+		]
+	}
+];
+var categoryCounts = categories.map((category) => ({
+	category,
+	count: restaurants.filter((restaurant) => restaurant.category === category).length
+}));
+var groupedRestaurants = categories.map((category) => ({
+	category,
+	restaurants: restaurants.filter((restaurant) => restaurant.category === category)
+}));
+var quizQuestions = [
+	{
+		prompt: "What style of Asian cuisine are you craving?",
+		choices: {
+			A: "Mastered Classics: Pristine sushi-style bites, premium tofu, and sizzling vegetables.",
+			B: "Deep Spice & Aromatics: Rich curries, clay-oven vegetables, and hand-pulled noodles.",
+			C: "Balance & Fresh Herbs: Vibrant stir-fries, bright lime dressings, and soothing broths.",
+			D: "Savory Comfort & Dim Sum: Steaming dumplings, roasted mushrooms, and rich savory sauces."
+		}
+	},
+	{
+		prompt: "What is your ideal dinner setup?",
+		choices: {
+			A: "Sharing elegant bites of tofu and vegetables or watching a chef build beautiful plates.",
+			B: "Sharing oversized platters of spiced vegetables, rich gravies, and warm flatbreads.",
+			C: "Digging into a vibrant, herb-packed noodle salad or a sweet and savory stir-fry.",
+			D: "Passing around bamboo baskets of dumplings and sharing large plates of noodles."
+		}
+	},
+	{
+		prompt: "What is the vibe of the night?",
+		choices: {
+			A: "High-energy, interactive, or upscale—great for an impressive date or a fun celebration.",
+			B: "Warm, deeply comforting, and focused on intense, layered flavors.",
+			C: "Casual, bright, and refreshing—perfect for a quick, healthy, and satisfying bite.",
+			D: "Buzzing, traditional, and classic, the timeless comfort of a bustling neighborhood staple."
+		}
+	},
+	{
+		prompt: "What matters most for the meal?",
+		choices: {
+			A: "A polished experience where technique and presentation really matter.",
+			B: "A big, cozy spread that leaves you feeling warm and completely satisfied.",
+			C: "Something fast, lively, and easy to enjoy without overthinking it.",
+			D: "A dependable classic with familiar flavors and lots of comfort."
+		}
+	},
+	{
+		prompt: "What would make you happiest at the table?",
+		choices: {
+			A: "Crisp vegetables, precise technique, and a meal that feels carefully composed.",
+			B: "Charred vegetables, deep spice, and a plate that feels generous and bold.",
+			C: "Bright herbs, brothy noodles, and a meal that feels fresh and easy.",
+			D: "Warm dumplings, familiar sauces, and a comforting spread to share."
+		}
+	}
+];
+var quizMatches = {
+	A: {
+		title: "The Interactive Connoisseur",
+		restaurant: "Uni",
+		category: "Japanese & Sushi",
+		summary: "Best for an elevated night out with sushi, polished bites, and the kind of place that feels special from the first course.",
+		anchor: "#japanese-and-sushi"
+	},
+	B: {
+		title: "The Spice & Herb Explorer",
+		restaurant: "Punjabi Dhaba",
+		category: "Indian & South Asian",
+		summary: "A strong fit for rich curries, bold spice, and the comforting side of the menu that leans into warmth and depth.",
+		anchor: "#indian-and-south-asian"
+	},
+	C: {
+		title: "The Vibrant Herbalist",
+		restaurant: "Dakzen",
+		category: "Thai",
+		summary: "Great when you want fresh herbs, bright broth, and a meal that feels lively without being heavy.",
+		anchor: "#thai"
+	},
+	D: {
+		title: "The Comfort Traditionalist",
+		restaurant: "Banh Mi Ba Le",
+		category: "Vietnamese & Cambodian",
+		summary: "Ideal for a classic, satisfying comfort meal with fast service and the kind of easygoing energy that never gets old.",
+		anchor: "#vietnamese-and-cambodian"
+	}
+};
+var rotatingRestaurants = {
+	A: [
+		"Uni",
+		"O Ya",
+		"Three 1 One",
+		"Sugidama"
+	],
+	B: [
+		"Punjabi Dhaba",
+		"The Maharaja",
+		"Dosa N Curry",
+		"Zuzu Momo"
+	],
+	C: [
+		"Dakzen",
+		"Kala Thai Cookery",
+		"Sugar & Spice",
+		"Brown Sugar Cafe"
+	],
+	D: ["Banh Mi Ba Le", "The Elephant Walk"]
+};
+var rotatingIndexes = {
+	A: 0,
+	B: 0,
+	C: 0,
+	D: 0
+};
+var googleFormBaseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfhi7MbGsfS0wrrovC5O9PSGNBhCKpKB40YNWX3uGkfSh-3LA/formResponse";
+var googleFormEntryIds = [
+	"entry.1580320291",
+	"entry.2087639634",
+	"entry.2039555081",
+	"entry.278851547",
+	"entry.2088519626"
+];
+var googleFormChoiceMap = {
+	A: [
+		"Mastered Classics: Pristine sushi-style bites, premium tofu, and sizzling vegetables.",
+		"Sharing elegant bites of tofu and vegetables or watching a chef build beautiful plates.",
+		"High-energy, interactive, or upscale—great for an impressive date or a fun celebration.",
+		"A polished experience where technique and presentation really matter.",
+		"Crisp vegetables, precise technique, and a meal that feels carefully composed."
+	],
+	B: [
+		"Deep Spice & Aromatics: Rich curries, clay-oven vegetables, and hand-pulled noodles.",
+		"Sharing oversized platters of spiced vegetables, rich gravies, and warm flatbreads.",
+		"Warm, deeply comforting, and focused on intense, layered flavors.",
+		"A big, cozy spread that leaves you feeling warm and completely satisfied.",
+		"Charred vegetables, deep spice, and a plate that feels generous and bold."
+	],
+	C: [
+		"Balance & Fresh Herbs: Vibrant stir-fries, bright lime dressings, and soothing broths.",
+		"Digging into a vibrant, herb-packed noodle salad or a sweet and savory stir-fry.",
+		"Casual, bright, and refreshing—perfect for a quick, healthy, and satisfying bite.",
+		"Something fast, lively, and easy to enjoy without overthinking it.",
+		"Bright herbs, brothy noodles, and a meal that feels fresh and easy."
+	],
+	D: [
+		"Savory Comfort & Dim Sum: Steaming dumplings, roasted mushrooms, and rich savory sauces.",
+		"Passing around bamboo baskets of dumplings and sharing large plates of noodles.",
+		"Buzzing, traditional, and classic, the timeless comfort of a bustling neighborhood staple.",
+		"A dependable classic with familiar flavors and lots of comfort.",
+		"Warm dumplings, familiar sauces, and a comforting spread to share."
+	]
+};
+var restaurantAnchors = new Map(restaurants.map((restaurant) => [restaurant.name, `restaurant-${toId(restaurant.name)}`]));
+function toId(value) {
+	return value.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+function googleMapsDirectionsUrl(query) {
+	return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(query)}`;
+}
+function googleMapsPlaceUrl(query) {
+	return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}
+function countAnswers(selections) {
+	const counts = {
+		A: 0,
+		B: 0,
+		C: 0,
+		D: 0
+	};
+	for (const selection of selections) counts[selection] += 1;
+	return counts;
+}
+function chooseRotatingRestaurant(choice) {
+	const options = rotatingRestaurants[choice];
+	const index = rotatingIndexes[choice] % options.length;
+	rotatingIndexes[choice] += 1;
+	return options[index];
+}
+function submitGoogleFormInBackground(selections) {
+	const iframeId = "quiz-google-form-target";
+	let iframe = document.getElementById(iframeId);
+	if (!iframe) {
+		iframe = document.createElement("iframe");
+		iframe.name = iframeId;
+		iframe.id = iframeId;
+		iframe.hidden = true;
+		document.body.appendChild(iframe);
+	}
+	const form = document.createElement("form");
+	form.method = "POST";
+	form.action = googleFormBaseUrl;
+	form.target = iframeId;
+	form.style.display = "none";
+	googleFormEntryIds.forEach((entryId, index) => {
+		const input = document.createElement("input");
+		input.type = "hidden";
+		input.name = entryId;
+		input.value = googleFormChoiceMap[selections[index]][index] ?? "";
+		form.appendChild(input);
+	});
+	document.body.appendChild(form);
+	form.submit();
+	form.remove();
+}
+function WaffleIcon() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+		className: "waffleIcon",
+		"aria-hidden": "true",
+		children: Array.from({ length: 9 }).map((_, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {}, index))
+	});
+}
+function RestaurantCard({ restaurant }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
+		className: `restaurantCard accent-${restaurant.accent}`,
+		id: restaurantAnchors.get(restaurant.name),
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "cardTopline",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+					className: "rank",
+					children: ["#", restaurant.rank]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: restaurant.price })]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { children: restaurant.name }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "metaLine",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: restaurant.neighborhood }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: restaurant.mood })]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "description",
+				children: restaurant.description.map((sentence) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: sentence }, sentence))
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "mapsLinks",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+					className: "mapsLink",
+					href: googleMapsPlaceUrl(restaurant.mapsQuery),
+					target: "_blank",
+					rel: "noreferrer",
+					"aria-label": `Open Google Maps listing and reviews for ${restaurant.name}`,
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Google Maps" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Reviews + place" })]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+					className: "mapsLink mapsLinkSecondary",
+					href: googleMapsDirectionsUrl(restaurant.mapsQuery),
+					target: "_blank",
+					rel: "noreferrer",
+					"aria-label": `Open Google Maps directions for ${restaurant.name}`,
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Directions" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "ETA from you" })]
+				})]
+			})
+		]
+	});
+}
+function Home() {
+	const [selections, setSelections] = (0, import_react.useState)([
+		"A",
+		"A",
+		"A",
+		"A",
+		"A"
+	]);
+	const [submitted, setSubmitted] = (0, import_react.useState)(false);
+	const counts = (0, import_react.useMemo)(() => countAnswers(selections), [selections]);
+	const winner = Object.entries(counts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0][0] ?? "A";
+	const result = {
+		...quizMatches[winner],
+		restaurant: chooseRotatingRestaurant(winner)
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", { children: [
+		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
+			className: "topBar",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+				className: "brandMark",
+				href: "#top",
+				"aria-label": "Top of page",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "20" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Boston Asian Restaurants" })]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("details", {
+				className: "waffleMenu",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("summary", {
+					title: "Categories",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(WaffleIcon, {}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "srOnly",
+						children: "Categories"
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("nav", {
+					"aria-label": "Restaurant categories",
+					children: [categoryCounts.map(({ category, count }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+						href: `#${toId(category)}`,
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: category }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: count })]
+					}, category)), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+						href: "#quiz",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Quiz" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Pick one" })]
+					})]
+				})]
+			})]
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+			className: "hero",
+			id: "top",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "heroOverlay" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "heroContent",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "eyebrow",
+						children: "Boston, Massachusetts"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", { children: "Top 20 Asian Restaurants" }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "heroText",
+						children: "A warm, spice-market guide to Chinese, Indian, Thai, Japanese, Korean, Vietnamese, and Cambodian food around Boston."
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "heroStats",
+						"aria-label": "Guide summary",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "20 picks" }),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "6 cuisine groups" }),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "3-sentence reviews" })
+						]
+					})
+				]
+			})]
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+			className: "introBand",
+			"aria-labelledby": "guide-note",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "personalNote",
+				"aria-labelledby": "personal-note",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+					id: "personal-note",
+					children: "A Note From The Guide"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "I may be a young diner, but Asian food has become one of my favorite ways to explore a city. I have visited many restaurants in search of dishes that feel generous, flavorful, and memorable. I hope you enjoy these selections as much as I do: sweet, savory, delicious meals that leave you happily full." })]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				id: "guide-note",
+				children: "Each pick is written for quick scanning: what the restaurant is, what the food and ambiance feel like, and when it is or is not the right choice."
+			})] })
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "guideWrap",
+			children: groupedRestaurants.map(({ category, restaurants: categoryRestaurants }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "categorySection",
+				id: toId(category),
+				"aria-labelledby": `${toId(category)}-heading`,
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "sectionHeading",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [categoryRestaurants.length, " picks"] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+						id: `${toId(category)}-heading`,
+						children: category
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "restaurantGrid",
+					children: categoryRestaurants.map((restaurant) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(RestaurantCard, { restaurant }, restaurant.name))
+				})]
+			}, category))
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+			className: "quizBand",
+			id: "quiz",
+			"aria-labelledby": "quiz-title",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "quizShell",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "quizHeader",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Quiz" }),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+								id: "quiz-title",
+								children: "Find your best match from the top 20"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "quizIntro",
+								children: "Pick the answer that feels closest for each question, then the quiz will surface the best restaurant fit from this list."
+							})
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "quizQuestions",
+						children: quizQuestions.map((question, questionIndex) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("fieldset", {
+							className: "quizQuestion",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("legend", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: ["Question ", questionIndex + 1] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: question.prompt })] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "quizChoices",
+								children: Object.keys(question.choices).map((choice) => {
+									return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+										type: "button",
+										className: selections[questionIndex] === choice ? "quizChoice isActive" : "quizChoice",
+										onClick: () => {
+											setSelections((current) => current.map((item, index) => index === questionIndex ? choice : item));
+											setSubmitted(false);
+										},
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: choice }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("em", { children: question.choices[choice] })]
+									}, choice);
+								})
+							})]
+						}, question.prompt))
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "quizActions",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+							type: "button",
+							className: "quizSubmit",
+							onClick: () => {
+								setSubmitted(true);
+								window.setTimeout(() => {
+									submitGoogleFormInBackground(selections);
+								}, 8e3);
+							},
+							children: "Submit quiz"
+						})
+					}),
+					submitted ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "quizResult",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "quizResultLabel",
+								children: "Your result"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { children: result.title }),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: result.summary })
+						] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "quizResultCard",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: result.category }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: result.restaurant }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+									href: `#${restaurantAnchors.get(result.restaurant) ?? ""}`,
+									children: "Jump to the card"
+								})
+							]
+						})]
+					}) : null
+				]
+			})
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("footer", {
+			className: "siteFooter",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Curated from current local dining guides and written as a review-ready draft. Hours, menus, and reservations can change." }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+					href: "https://boston.eater.com/maps/best-restaurants-boston-38",
+					children: "Eater 38"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+					href: "https://boston.eater.com/maps/best-chinese-food-boston",
+					children: "Chinese"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+					href: "https://boston.eater.com/maps/best-indian-restaurants-greater-boston",
+					children: "Indian"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+					href: "https://boston.eater.com/maps/best-thai-food-boston",
+					children: "Thai"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+					href: "https://boston.eater.com/maps/best-sushi-restaurants-boston",
+					children: "Sushi"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+					href: "https://boston.eater.com/maps/best-korean-food-boston",
+					children: "Korean"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+					href: "https://boston.eater.com/17690858/best-boston-food-restaurants-city-guide-where-to-eat",
+					children: "Boston guide"
+				})
+			] })]
+		})
+	] });
+}
+//#endregion
+export { Home as default };

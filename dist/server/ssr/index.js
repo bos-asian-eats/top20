@@ -1855,6 +1855,7 @@ var require_react_jsx_runtime_production = /* @__PURE__ */ __commonJSMin(((expor
 		};
 	}
 	exports.jsx = jsxProd;
+	exports.jsxs = jsxProd;
 }));
 //#endregion
 //#region node_modules/.pnpm/react@19.2.6/node_modules/react/jsx-runtime.js
@@ -11626,8 +11627,14 @@ function createFromReadableStream(stream, options = {}) {
 //#endregion
 //#region \0virtual:vite-rsc/client-references
 var client_references_default = {
+	"6efdf509a785": async () => {
+		const m = await import("./assets/page-k5A0wgwj.js");
+		return { get "default"() {
+			return m["default"];
+		} };
+	},
 	"6f7386b31f5d": async () => {
-		const m = await import("./assets/layout-segment-context-X7GeDMMc.js");
+		const m = await import("./assets/layout-segment-context-CNrL8qyJ.js");
 		return { get "LayoutSegmentProvider"() {
 			return m["LayoutSegmentProvider"];
 		} };
@@ -11647,7 +11654,7 @@ var client_references_default = {
 		};
 	},
 	"7fcd9d86d73f": async () => {
-		const m = await import("./assets/error-boundary-BSRZC44X.js");
+		const m = await import("./assets/error-boundary-7tABSoCY.js");
 		return {
 			get "ErrorBoundary"() {
 				return m["ErrorBoundary"];
